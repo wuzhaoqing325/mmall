@@ -4,6 +4,7 @@ var _user = {
 	// 用户登录
 	login:function(userInfo, resolve, reject){
 		_mm.request({
+			// url     :_mm.getServerUrl('http://test.happymmall.com/user/login.do'),
 			url     :_mm.getServerUrl('/user/login.do'),
 			data    :userInfo,
 			method  : 'POST',
