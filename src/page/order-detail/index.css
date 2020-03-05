@@ -1,4 +1,6 @@
-
+.panel{
+    margin-bottom: 20px;
+}
 /*订单信息*/
 .order-info .text-line{
     height: 30px;

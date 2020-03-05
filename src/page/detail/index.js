@@ -1,12 +1,12 @@
 require('./index.css');
 require('page/common/nav/index.js');
 require('page/common/header/index.js');
-require('util/slider/index.js');
+
 var templateIndex = require('./index.string');
 var _mm = require('util/mm.js');
 var _cart = require('service/cart-service.js');
 var _product = require('service/product-service.js');
-var Pagination = require('util/pagination/index.js');
+
 
 var page = {
 	data:{
@@ -34,7 +34,7 @@ var page = {
 		$(document).on('click', '.p-count-btn', function(){
 			var type = $(this).hasClass('plus') ? 'plus' : 'minus',
 				$pCount = $('.p-count'),
-				currCount = ParseInt($pCount.val()),
+				currCount = parseInt($pCount.val()),
 				minCount = 1,
 				maxCount = _this.data.detailInfo.stock || 1;
 

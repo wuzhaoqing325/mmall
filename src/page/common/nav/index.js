@@ -36,7 +36,8 @@ var nav = {
 			$('.user.not-login').hide().siblings('.user.login').show()
 			.find('.username').text(res.username);
 		}, function(errMsg){
-			// do nothing
+			// 如果发现没有登录，强制登录
+			_mm.doLogin();
 		})
 	},
 	// 加载购物车数量

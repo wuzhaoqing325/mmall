@@ -37,6 +37,7 @@ var page = {
             //渲染html
             orderListHtml = _mm.renderHtml(templateIndex,res);
             $listCon.html(orderListHtml);
+             //加载分页信息
             _this.loadPagination({
                 hasPreviousPage : res.hasPreviousPage,
                 prePage         : res.prePage,
@@ -53,7 +54,7 @@ var page = {
     loadPagination : function (pageInfo) {
         var _this = this;
         this.pagination ? '' : (this.pagination = new Pagination());
-        this.pagination.render($.extend({},pageInfo,{
+        this.pagination.render($.extend({}, pageInfo, {
             container : $('.pagination'),
             onSelectPage : function (pageNum) {
                 _this.data.listParam.pageNum = pageNum;

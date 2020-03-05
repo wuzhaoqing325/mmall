@@ -10,14 +10,15 @@ var formError = {
 		$('.error-item').show().find('.err-msg').text(errMsg);
 	},
 	hide: function(){
-		$('.error-item').show().find('.err-msg').text('');
+		$('.error-item').hide();
+		// $('.error-item').show().find('.err-msg').text('');
 	}
 };
 // page逻辑部分
 var page = {
 	data:{
 		username: '',
-		qusetion: '',
+		question: '',
 		answer: '',
 		token:''
 	},
@@ -37,7 +38,7 @@ var page = {
 			if(username){
 				_user.getQuestion(username, function(res){
 					_this.data.username = username;
-					_this.data.qusetion = res;
+					_this.data.question = res;
 					_this.loadStepQuestion();
 				}, function(errMsg){
 					formError.show(errMsg);
@@ -49,13 +50,13 @@ var page = {
 			}
 		});
 		// 输入密码提示问题下一步按钮的点击
-		$('#submit-qusetion').click(function(){
+		$('#submit-question').click(function(){
 			var answer = $.trim($('#answer').val());
 			// 密码提示问题答案存在
 			if(answer){
 				_user.checkAnswer({
 					username: _this.data.username,
-					qusetion: _this.data.qusetion,
+					question: _this.data.question,
 					answer: answer
 				}, function(res){
 					_this.data.answer = answer;
@@ -103,15 +104,15 @@ var page = {
 		// 做容器切换
 		$('.step-username').hide()
 		.siblings('.step-question').show()
-		.find('.qusetion').text(this.data.qusetion);
+		.find('.question').text(this.data.question);
 	},
 	// 加载输入password的一步
 	loadStepPassword:function(){
 		// 清除错误提示
 		formError.hide();
 		// 做容器切换
-		$('.step-username').hide()
-		.siblings('.step-question').show();
+		$('.step-question').hide()
+		.siblings('.step-password').show();
 	}
 };
 $(function(){

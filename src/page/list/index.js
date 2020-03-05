@@ -1,7 +1,6 @@
 require('./index.css');
 require('page/common/nav/index.js');
 require('page/common/header/index.js');
-require('util/slider/index.js');
 var templateIndex = require('./index.string');
 var _mm = require('util/mm.js');
 var _product = require('service/product-service.js');
@@ -14,7 +13,7 @@ var page = {
 			categoryId:_mm.getUrlParam('categoryId') || '',
 			orderBy:_mm.getUrlParam('orderBy') || 'default',
 			pageNum:_mm.getUrlParam('pageNum') || 1,
-			pageSize:_mm.getUrlParam('pageSize') || 20
+			pageSize:_mm.getUrlParam('pageSize') || 10
 		}
 	},
 	init:function(){
@@ -50,10 +49,10 @@ var page = {
 				// 如果是降序，就变为升序
 				if(!$this.hasClass('asc')){
 					$this.addClass('asc').removeClass('desc');
-					_this.data.listParam.orderBy = 'price-asc';
+					_this.data.listParam.orderBy = 'price_asc';
 				}else{
 					$this.addClass('desc').removeClass('asc');
-					_this.data.listParam.orderBy = 'price-desc';
+					_this.data.listParam.orderBy = 'price_desc';
 				}
 			}
 			// 重新加载列表
@@ -75,6 +74,7 @@ var page = {
 				list : res.list
 			});
 			$pListCon.html(listHtml);
+			// 加载分页信息
 			_this.loadPagination({
 				hasPreviousPage : res.hasPreviousPage,
 				prePage : res.prePage,

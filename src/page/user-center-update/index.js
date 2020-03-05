@@ -39,7 +39,7 @@ var page = {
 			var userInfo = {
 				phone: $.trim($('#phone').val()),
 				email: $.trim($('#email').val()),
-				qusetion: $.trim($('#qusetion').val()),
+				question: $.trim($('#question').val()),
 				answer: $.trim($('#answer').val())
 			},
 			validateResult = _this.validateForm(userInfo);
@@ -75,12 +75,12 @@ var page = {
 			return result;
 		}
 		// 验证问题
-		if(!_mm.validate(formData.qusetion, 'require')){
+		if(!_mm.validate(formData.question, 'require')){
 			result.msg = '密码提示问题不能为空';
 			return result;
 		}
 		// 验证答案
-		if(!_mm.validate(formData.answer, 'answer')){
+		if(!_mm.validate(formData.answer, 'require')){
 			result.msg = '密码提示问题答案不能为空';
 			return result;
 		}

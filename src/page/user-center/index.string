@@ -13,7 +13,7 @@
 	</div>
 	<div class="form-line">
 		<span class="label">问 题：</span>
-		<span class="text">{{qusetion}}</span>
+		<span class="text">{{question}}</span>
 	</div>
 	<div class="form-line">
 		<span class="label">答 案：</span>

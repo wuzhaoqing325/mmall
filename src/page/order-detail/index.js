@@ -55,6 +55,7 @@ var page = {
     },
     //数据的适配
     dataFilter : function (data) {
+        // data.status == 10表示未支付
         data.needPay = data.status == 10 ;
         data.isCancelable = data.status == 10 ;
     }

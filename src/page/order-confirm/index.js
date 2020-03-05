@@ -2,12 +2,14 @@
 require('./index.css');
 require('page/common/header/index.js');
 require('page/common/nav/index.js');
+
 var _mm = require('util/mm.js');
 var _order = require('service/order-service.js');
 var _address = require('service/address-service.js');
 var templateAddress = require('./address-list.string');
 var templateProduct = require('./product-list.string');
 var addressModal = require('./address-modal.js');
+
 var page = {
     data : {
         selectedAddressId : null
@@ -27,21 +29,7 @@ var page = {
             $(this).addClass('active').siblings('.address-item').removeClass('active');
             _this.data.selectedAddressId = $(this).data('id');
         });
-        //订单的提交
-        $(document).on('click','.order-submit',function () {
-            var shippingId = _this.data.selectedAddressId;
-            if(shippingId){
-                _order.createOrder({
-                    shippingId : shippingId
-                },function (res) {
-                    window.location.href = './payment.html?orderNumber=' + res.orderNo;
-                },function (errMsg) {
-                    _mm.errorTips(errMsg);
-                })
-            }else{
-                _mm.errorTips('请选择地址后再提交');
-            }
-        });
+        
         //地址的添加
         $(document).on('click','.address-add',function () {
             addressModal.show({
@@ -71,13 +59,28 @@ var page = {
         //地址的删除
         $(document).on('click','.address-delete',function (e) {
             e.stopPropagation();
-            var id = $(this).parents('.address-item').data('id');
+            var shippingId = $(this).parents('.address-item').data('id');
             if(window.confirm('确认要删除改地址吗?')){
-                _address.deleteAddress(id,function (res) {
+                _address.deleteAddress(shippingId, function (res) {
                     _this.loadAddressList();
                 },function (errMsg) {
                     _mm.errorTips(errMsg);
                 })
+            }
+        });
+        //订单的提交
+        $(document).on('click','.order-submit',function () {
+            var shippingId = _this.data.selectedAddressId;
+            if(shippingId){
+                _order.createOrder({
+                    shippingId : shippingId
+                },function (res) {
+                    window.location.href = './payment.html?orderNumber=' + res.orderNo;
+                },function (errMsg) {
+                    _mm.errorTips(errMsg);
+                })
+            }else{
+                _mm.errorTips('请选择地址后再提交');
             }
         });
     },
@@ -88,16 +91,30 @@ var page = {
         $('.address-con').html('<div class="loading"></div>')
 
         _address.getAddressList(function (res) {
-            _this.addressFilter(res)
+            _this.addressFilter(res);
             var addressListHtml = _mm.renderHtml(templateAddress,res);
             $('.address-con').html(addressListHtml);
         },function (errMsg) {
             $('.address-con').html('<p class="err-tip">地址加载失败,请刷新后重试</p>')
         })
     },
+    
+    //加载商品清单
+    loadProductList : function () {
+        var _this = this;
+        $('.product-con').html('<div class="loading"></div>')
+        // 获取地址列表
+        _order.getProductList(function (res) {
+            var productListHtml = _mm.renderHtml(templateProduct,res);
+            $('.product-con').html(productListHtml);
+        },function (errMsg) {
+            $('.product-con').html('<p class="err-tip">商品信息加载失败,请刷新后重试</p>')
+        })
+    },
+
     //处理地址列表中选中状态
     addressFilter : function (data) {
-        console.log(this.data.selectedAddressId)
+        // console.log(this.data.selectedAddressId)
         if(this.data.selectedAddressId){
             var selectedAddressIdFlag = false;
             for(var i = 0,length = data.list.length; i < length; i++){
@@ -111,37 +128,7 @@ var page = {
                 this.data.selectedAddressId = null;
             }
         }
-    },
-    //加载商品清单
-    loadProductList : function () {
-        var _this = this;
-        $('.product-con').html('<div class="loading"></div>')
-        // 获取地址列表
-        _order.getProductList(function (res) {
-            var productListHtml = _mm.renderHtml(templateProduct,res);
-            $('.product-con').html(productListHtml);
-        },function (errMsg) {
-            $('.product-con').html('<p class="err-tip">商品信息加载失败,请刷新后重试</p>')
-        })
-    },
-    //删除指定商品,支持批量,productId用逗号分隔
-    deleteCartProduct : function () {
-        var _this = this;
-        _cart.deleteProduct(productIds,function (res) {
-            _this.renderCart(res);
-        },function (errMsg) {
-            _this.showCartError()
-        })
-    },
-
-    //数据匹配
-    filter : function (data) {
-        data.notEmpty = !!data.cartProductVoList.length;
-    },
-    //显示错误信息
-    showCartError : function () {
-        $('.page-wrap').html('<p class="err-tip">哪里不对了,刷新下试试吧</p>')
-    }
+    } 
 };
 $(function () {
     page.init();

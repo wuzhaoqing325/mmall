@@ -5,7 +5,6 @@
 {{^isActive}}
 <div class="address-item" data-id="{{id}}">
 {{/isActive}}
-<div class="address-item">
 	<div class="address-title">
 		{{receiverCity}} {{receiverProvince}} ({{receiverName}} 收)
 	</div>

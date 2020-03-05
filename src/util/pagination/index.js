@@ -17,7 +17,8 @@ var Pagination = function(){
 		if($this.hasClass('active') || $this.hasClass('disabled')){
 			return;
 		}
-		typeof _this.option.onSelectPage === 'function' ? _this.option.onSelectPage($this.data('value')) : null;
+		typeof _this.option.onSelectPage === 'function' 
+		? _this.option.onSelectPage($this.data('value')) : null;
 	});
 };
 // 渲染分页组件
@@ -40,8 +41,10 @@ Pagination.prototype.getPaginationHtml = function(){
 	var html = '',
 		option = this.option,
 		pageArray = [],
-		start = option.pageNum - option.pageRange >0 ? option.pageNum - option.pageRange : 1,
-		end = option.pageNum + option.pageRange >option.pages ? option.pageNum + option.pageRange : option.pages;
+		start = option.pageNum - option.pageRange > 0 
+		? option.pageNum - option.pageRange : 1,
+		end = option.pageNum + option.pageRange > option.pages 
+		? option.pageNum + option.pageRange : option.pages;
 		// 上一页按钮的数据
 		pageArray.push({
 			name: '上一页',

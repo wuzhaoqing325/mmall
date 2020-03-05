@@ -10,7 +10,8 @@ var formError = {
 		$('.error-item').show().find('.err-msg').text(errMsg);
 	},
 	hide: function(){
-		$('.error-item').show().find('.err-msg').text('');
+		$('.error-item').hide();
+		// $('.error-item').show().find('.err-msg').text('');
 	}
 };
 // page逻辑部分
@@ -29,7 +30,7 @@ var page = {
 			}
 			// 异步验证用户名是否存在
 			_user.checkUsername(username, function(res){
-				formError.hide()
+				formError.hide();
 			}, function(errMsg){
 				formError.show(errMsg);
 			});
@@ -109,12 +110,12 @@ var page = {
 			return result;
 		}
 		// 验证密码提示问题是否为空
-		if(!_mm.validate(formData.question, 'question')){
+		if(!_mm.validate(formData.question, 'require')){
 			result.msg = '密码提示问题不能为空';
 			return result;
 		}
 		// 验证密码提示问题答案是否为空
-		if(!_mm.validate(formData.answer, 'answer')){
+		if(!_mm.validate(formData.answer, 'require')){
 			result.msg = '密码提示问题答案不能为空';
 			return result;
 		}

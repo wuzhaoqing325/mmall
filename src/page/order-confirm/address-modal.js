@@ -3,6 +3,7 @@ var _mm = require('util/mm.js');
 var _cities = require('util/cities/index.js');
 var _address = require('service/address-service.js');
 var templateAddressModal = require('./address-modal.string');
+
 var addressModal = {
     show : function (option) {
         //option绑定
@@ -13,6 +14,10 @@ var addressModal = {
         this.loadModal();
         //绑定事件
         this.bindEvent()
+    },
+    //关闭弹窗
+    hide : function () {
+        this.$modalWrap.empty();
     },
     bindEvent : function () {
         var _this = this;
@@ -137,10 +142,6 @@ var addressModal = {
             result.data = receiverInfo
         }
         return result;
-    },
-    //关闭弹窗
-    hide : function () {
-        this.$modalWrap.empty();
     }
 };
 

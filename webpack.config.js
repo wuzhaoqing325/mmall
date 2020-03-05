@@ -41,7 +41,7 @@ var config = {
     },
     output: {
         path: './dist',
-        publicPath : '/dist',
+        publicPath : '/dist/',
         filename: 'js/[name].js'
     },
     externals : {
@@ -90,7 +90,34 @@ var config = {
         new HtmlWebpackPlugin(getHtmlConfig('result', '操作结果')),
         new HtmlWebpackPlugin(getHtmlConfig('about', '关于MMALL'))
         
-    ]
+    ],
+    devServer: {
+        historyApiFallback:{
+            index: '/dist/view/index.html'
+        },
+        proxy: {
+            '/shipping': {
+                target: 'http://test.happymmall.com',
+                changeOrigin: true,
+            },
+            '/cart': {
+                target: 'http://test.happymmall.com',
+                changeOrigin: true,
+            },
+            '/order': {
+                target: 'http://test.happymmall.com',
+                changeOrigin: true,
+            },
+            '/product': {
+                target: 'http://test.happymmall.com',
+                changeOrigin: true,
+            },
+            '/user': {
+                target: 'http://test.happymmall.com',
+                changeOrigin: true,
+            }
+        }
+    }
 };
 
 if('dev' === WEBPACK_ENV){

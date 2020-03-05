@@ -104,7 +104,8 @@ var page = {
 		// 删除选中商品
 		$(document).on('click', '.delete-selected', function(){
 			if(window.confirm('确认要删除选中的商品？')){
-				var arrProductIds = $('.cart-select:checked');
+				var arrProductIds = [],
+					$selectedItem = $('.cart-select:checked');
 				// 循环查找选中的ProductIds
 				for(var i=0,iLength = $selectedItem.length; i < iLength; i++){
 					arrProductIds.push($($selectedItem[i]).parents('.cart-table').data('product-id'));
@@ -121,7 +122,7 @@ var page = {
 		$(document).on('click', '.btn-submit', function(){
 			// 总价大于0，进行提交
 			if(_this.data.cartInfo && _this.data.cartInfo.cartTotalPrice > 0){
-				window.location.href = './confirm.html';
+				window.location.href = './order-confirm.html';
 			}else{
 				_mm.errorTips('请选择商品后再提交');
 			}
@@ -164,7 +165,7 @@ var page = {
 	},
 	// 数据匹配
 	filter:function(data){
-		data.notEmpty = !!data.cartProductList.length;
+		data.notEmpty = !!data.cartProductVoList.length;
 	}
 };
 $(function(){

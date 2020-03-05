@@ -25,10 +25,11 @@
 	top:8px;
 	right:8px;
 }
+/*显示一个时，另一个隐藏*/
 .sort-con .sort-item.asc .fa-sort-desc{
 	opacity: .6;
 }
-.sort-con .sort-item.desc .fa-sort-desc{
+.sort-con .sort-item.desc .fa-sort-asc{
 	opacity: .6;
 }
 /*列表*/

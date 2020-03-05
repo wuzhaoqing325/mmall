@@ -20,7 +20,7 @@
             <span class="order-text">订单状态:{{statusDesc}}</span>
             <span class="order-text">
                 <span>订单总价:</span>
-                <span class="order-total">${{payment}}</span>
+                <span class="order-total">￥{{payment}}</span>
             </span>
             <a href="./order-detail.html?orderNumber={{orderNo}}" class="link order-detail" target="_blank">查看详情</a>
         </td>
@@ -37,9 +37,9 @@
                 {{productName}}
             </a>
         </td>
-        <td class="cell cell-price">${{currentUnitPrice}}</td>
+        <td class="cell cell-price">￥{{currentUnitPrice}}</td>
         <td class="cell cell-count">{{quantity}}</td>
-        <td class="cell cell-total">${{totalPrice}}</td>
+        <td class="cell cell-total">￥{{totalPrice}}</td>
     </tr>
     {{/orderItemVoList}}
 </table>

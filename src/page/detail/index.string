@@ -4,11 +4,11 @@
 			<img  class="main-img" src="{{imageHost}}{{mainImage}}" alt="{{name}}" />
 		</div>
 		<ul class="p-img-list">
-			{{#subImage}}	
+			{{#subImages}}	
 				<li class="p-img-item">
 					<img class="p-img" src="{{imageHost}}{{.}}" alt="{{name}}" />
 				</li>
-			{{/subImage}}
+			{{/subImages}}
 		</ul>
 	</div>
 	<div class="p-info-con">
@@ -40,6 +40,6 @@
 		</ul>
 	</div>
 	<div class="detail-con">
-		{{detail}}
+		{{{detail}}}
 	</div>
 </div>

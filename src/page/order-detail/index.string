@@ -1,5 +1,5 @@
 <div class="panel">
-    <div class="panel-title">订单信息</div>
+    <h3 class="panel-title">订单信息</h3>
     <div class="panel-body">
         <div class="order-info">
             <div class="text-line">
@@ -34,7 +34,7 @@
 </div>
 
 <div class="panel">
-    <div class="panel-title">商品清单</div>
+    <h3 class="panel-title">商品清单</h3>
     <div class="panel-body">
         <table class="product-table">
             <tr>
@@ -56,15 +56,15 @@
                         {{productName}}
                     </a>
                 </td>
-                <td class="cell cell-price">${{currentUnitPrice}}</td>
+                <td class="cell cell-price">￥{{currentUnitPrice}}</td>
                 <td class="cell cell-count">{{quantity}}</td>
-                <td class="cell cell-total">${{totalPrice}}</td>
+                <td class="cell cell-total">￥{{totalPrice}}</td>
             </tr>
             {{/orderItemVoList}}
         </table>
         <p class="total">
             <span>订单总价:</span>
-            <span class="total-price">${{payment}}</span>
+            <span class="total-price">￥{{payment}}</span>
         </p>
     </div>
 </div>

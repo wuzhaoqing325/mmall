@@ -6,24 +6,24 @@
 		<th class="cell-img">数量</th>
 		<th class="cell-img">小计</th>
 	</tr>
-	{{#orderItemList}}
+	{{#orderItemVoList}}
 	<tr>
 		<td class="cell-img">
 			<a href="./detail.html?productId={{productId}}" target="_blank">
-				<img src="{{imageHost}}{{productImage}}" alt="{{productName}}" class="p-img">
+				<img class="p-img" src="{{imageHost}}{{productImage}}" alt="{{productName}}">
 			</a>
 		</td>
 		<td class="cell-info">
-			<a href="./detail.html?productId=" class="link" target="_blank">{{productName}}</a>
+			<a href="./detail.html?productId={{productId}}" class="link" target="_blank">{{productName}}</a>
 		</td>
-		<td class="cell-price">{{currentUnitPrice}}</td>
+		<td class="cell-price">￥{{currentUnitPrice}}</td>
 		<td class="cell-count">{{quantity}}</td>
 		<td class="cell-total">{{totalPrice}}</td>
 	</tr>
-	{{/orderItemList}}
+	{{/orderItemVoList}}
 </table>
 <div class="submit-con">
 	<span>订单总价：</span>
-	<span class="submit-total">$qqq</span>
+	<span class="submit-total">￥{{productTotalPrice}}</span>
 	<span class="btn order-submit">提交订单</span>
 </div>
